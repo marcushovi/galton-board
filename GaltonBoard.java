@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class HodKockou {
+public class GaltonBoard {
 
     static Scanner sc = new Scanner( System.in );
 
@@ -9,8 +9,8 @@ public class HodKockou {
         Random r = new Random();
 
         if ( depth == 0 ) return index;
-        int desicion = r.nextDouble() >= 0.5? 1 : 0;
-        if ( desicion == 1 ) return galtonBoard( depth - 1, index - 1 );
+        int decision = r.nextDouble() >= 0.5? 1 : 0;
+        if ( decision == 1 ) return galtonBoard( depth - 1, index - 1 );
         else return galtonBoard( depth - 1, index + 1 );
     }
 
@@ -36,17 +36,17 @@ public class HodKockou {
 
     public static void main( String[] args ) {
 
-        int depth = 0;
-        int numberAttempts = 0;
+        int depth;
+        int numberAttempts;
         int[] attempts;
         int[] result = new int[0];
 
         System.out.println( "Throw dice -> press D" );
         System.out.println( "Galton Board -> press G" );
-        String desicion = sc.next();
+        String decision = sc.next();
 
 
-        if ( desicion.equals( "D" ) || desicion.equals( "d" )) {
+        if ( decision.equals( "D" ) || decision.equals( "d" )) {
 
             depth = getInput( "dices" );
             numberAttempts = getInput( "throws" );
@@ -61,7 +61,7 @@ public class HodKockou {
                 result[ ( attempts[ i ] - 1 ) ]++;
             }
 
-        } else if ( desicion.equals( "G" ) || desicion.equals( "g" ) ) {
+        } else if ( decision.equals( "G" ) || decision.equals( "g" ) ) {
 
             depth = getInput( "depth" );
             numberAttempts = getInput( "balls" );
@@ -69,7 +69,7 @@ public class HodKockou {
             attempts = new int[ numberAttempts ];
             result = new int[ depth * 2 + 1 ];
             int middle = (depth * 2 + 1) / 2;
-            int index = 0;
+            int index;
             for ( int i = 0; i < attempts.length; i++ ) {
                 index = galtonBoard( depth, middle );
                 result[index]++;
